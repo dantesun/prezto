@@ -21,3 +21,28 @@ if [ -f ~/.dircolors ]; then
   eval $(dircolors ~/.dircolors)
   zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 fi
+
+unset MANPATH
+export MANPATH=$HOME/tools/share/man:$(manpath)
+
+export EDITOR='vim'
+export VISUAL='vim'
+alias vi='vim'
+
+if [ "Darwin" = `uname -s` ]; then
+  #Note: on MacOS /etc/paths will make /usr/local/bin the last element in PATH, must explicitly append /usr/local/bin before PATH
+  export PATH=/usr/local/bin:$PATH
+  # This is for HomeBrew on MacOS
+  if which brew &> /dev/null; then
+    CURL_PATH="$(brew --prefix curl)/bin"
+    COREUTIL_PATH="$(brew --prefix coreutils)/libexec/gnubin"
+    FINDUTILS_PATH="$(brew --prefix findutils)/bin"
+    CTAGS_PATH="$(brew --prefix ctags)/bin"
+    GETTEXT_PATH="$(brew --prefix gettext)/bin"
+    BREW_AUX_PATH="$COREUTIL_PATH:$CURL_PATH:$FINDUTILS_PATH:$CTAGS_PATH:$GETTEXT_PATH"
+    alias find=gfind
+  fi
+  export PATH=$BREW_AUX_PATH:$TOOL_PATH:$PATH
+else
+  export PATH=$TOOL_PATH:$PATH
+fi
