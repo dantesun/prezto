@@ -17,6 +17,10 @@ fi
 bindkey "^R" history-incremental-search-backward
 bindkey '\e.' insert-last-word
 
+export EDITOR="vim"
+export VISUAL="vim"
+alias vi='vim'
+
 if [ -f ~/.dircolors ]; then
   eval $(dircolors ~/.dircolors)
   zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -46,3 +50,6 @@ if [ "Darwin" = `uname -s` ]; then
 else
   export PATH=$TOOL_PATH:$PATH
 fi
+
+Z_PLUGIN="/home/dsun/system/zplugins/z/z.sh"
+[ -f $Z_PLUGIN ] && . $Z_PLUGIN
