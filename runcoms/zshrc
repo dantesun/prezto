@@ -40,10 +40,11 @@ export EDITOR="vim"
 export VISUAL="vim"
 alias vi='vim'
 
-if [ -f ~/.dircolors ]; then
+[ -e ~/.dircolors ] && {
+  echo "Setting dircolors"
   eval $(dircolors ~/.dircolors)
   zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-fi
+}
 
 unset MANPATH
 export MANPATH=$HOME/tools/share/man:$(manpath)
