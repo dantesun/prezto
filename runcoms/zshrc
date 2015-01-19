@@ -41,7 +41,6 @@ export VISUAL="vim"
 alias vi='vim'
 
 [ -e ~/.dircolors ] && {
-  echo "Setting dircolors"
   eval $(dircolors ~/.dircolors)
   zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 }
